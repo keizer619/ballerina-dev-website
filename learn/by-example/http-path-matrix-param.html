@@ -25,6 +25,7 @@ redirect_from:
         <span class="k">var</span> <span class="nx">a</span> <span class="p">=</span> <span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span><span class="nx">pathMParams</span><span class="p">[</span><span class="s">&quot;a&quot;</span><span class="p">];</span>
         <span class="k">var</span> <span class="nx">b</span> <span class="p">=</span> <span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span><span class="nx">pathMParams</span><span class="p">[</span><span class="s">&quot;b&quot;</span><span class="p">];</span>
         <span class="kt">string</span> <span class="nx">pathMatrixStr</span> <span class="p">=</span> <span class="kt">string</span> <span class="s">`a=${a}, b=${b}`</span><span class="p">;</span>
+
         <span class="kt">map</span><span class="p">&lt;</span><span class="kt">any</span><span class="p">&gt;</span> <span class="nx">fooMParams</span> <span class="p">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">getMatrixParams</span><span class="p">(</span><span class="s">&quot;/sample/path/&quot;</span> <span class="o">+</span> <span class="nx">foo</span><span class="p">);</span>
         <span class="k">var</span> <span class="nx">x</span> <span class="p">=</span> <span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span><span class="nx">fooMParams</span><span class="p">[</span><span class="s">&quot;x&quot;</span><span class="p">];</span>
         <span class="k">var</span> <span class="nx">y</span> <span class="p">=</span> <span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span><span class="nx">fooMParams</span><span class="p">[</span><span class="s">&quot;y&quot;</span><span class="p">];</span>
@@ -121,6 +122,8 @@ redirect_from:
                         
                             
                         
+                            
+                        
 
                     <div>
 
@@ -177,11 +180,6 @@ redirect_from:
         var a = &lt;string&gt;pathMParams[&quot;a&quot;];
         var b = &lt;string&gt;pathMParams[&quot;b&quot;];
         string pathMatrixStr = string `a=${a}, b=${b}`;
-        map&lt;any&gt; fooMParams = req.getMatrixParams(&quot;/sample/path/&quot; + foo);
-        var x = &lt;string&gt;fooMParams[&quot;x&quot;];
-        var y = &lt;string&gt;fooMParams[&quot;y&quot;];
-        string fooMatrixStr = string `x=${x}, y=${y}`;
-        json matrixJson = {&quot;path&quot;: pathMatrixStr, &quot;foo&quot;: fooMatrixStr};
 </code></pre></div>
 
                                 </td>
@@ -193,6 +191,22 @@ redirect_from:
 
                                         </div>
                                     </div>
+                                    
+                                </td>
+                            </tr>
+                            
+                            <tr class="cTR">
+
+                                <td class="code leading">
+                                    <div class="highlight"><pre><code class=language-ballerina>        map&lt;any&gt; fooMParams = req.getMatrixParams(&quot;/sample/path/&quot; + foo);
+        var x = &lt;string&gt;fooMParams[&quot;x&quot;];
+        var y = &lt;string&gt;fooMParams[&quot;y&quot;];
+        string fooMatrixStr = string `x=${x}, y=${y}`;
+        json matrixJson = {&quot;path&quot;: pathMatrixStr, &quot;foo&quot;: fooMatrixStr};
+</code></pre></div>
+
+                                </td>
+                                <td class="docs">
                                     
                                 </td>
                             </tr>

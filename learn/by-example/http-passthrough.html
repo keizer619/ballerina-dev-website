@@ -22,23 +22,12 @@ redirect_from:
     <span class="c1">// The passthrough resource allows all HTTP methods since the resource configuration does not explicitly specify</span>
     <span class="c1">// which HTTP methods are allowed.</span>
     <span class="kd">resource</span> <span class="kd">function</span> <span class="err">&#39;</span><span class="k">default</span> <span class="p">.(</span><span class="nx">http</span><span class="p">:</span><span class="nx">Request</span> <span class="nx">req</span><span class="p">)</span>
-            <span class="nx">returns</span> <span class="nx">http</span><span class="p">:</span><span class="nx">Response</span><span class="p">|</span><span class="nx">http</span><span class="p">:</span><span class="nx">InternalServerError</span> <span class="p">{</span>
+            <span class="nx">returns</span> <span class="nx">http</span><span class="p">:</span><span class="nx">Response</span><span class="p">|</span><span class="nx">error</span><span class="err">?</span> <span class="p">{</span>
         <span class="c1">// When [forward()](https://docs.central.ballerina.io/ballerina/http/latest/clients/Client#forward) is called on the backend client endpoint, it forwards the request that the passthrough</span>
         <span class="c1">// resource received to the backend. When forwarding, the request is made using the same HTTP method that was</span>
         <span class="c1">// used to invoke the passthrough resource. The `forward()` function returns the response from the backend if</span>
         <span class="c1">// there are no errors.</span>
-        <span class="nx">http</span><span class="p">:</span><span class="nx">Response</span><span class="p">|</span><span class="nx">error</span> <span class="nx">clientResponse</span> <span class="p">=</span> <span class="nx">clientEP</span><span class="o">-&gt;</span><span class="nx">forward</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="nx">req</span><span class="p">);</span>
-
-        <span class="c1">// `forward()` can return an HTTP response or an error.</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">clientResponse</span> <span class="nx">is</span> <span class="nx">http</span><span class="p">:</span><span class="nx">Response</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// If the request was successful, an HTTP response is returned.</span>
-            <span class="k">return</span> <span class="nx">clientResponse</span><span class="p">;</span>
-
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="c1">// If there was an error, the 500 error response is sent back to the client.</span>
-            <span class="k">return</span> <span class="p">{</span><span class="nx">body</span><span class="p">:</span> <span class="nx">clientResponse</span><span class="p">.</span><span class="kt">message</span><span class="p">()};</span>
-
-        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">clientEP</span><span class="o">-&gt;</span><span class="nx">forward</span><span class="p">(</span><span class="s">&quot;/&quot;</span><span class="p">,</span> <span class="nx">req</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -140,16 +129,6 @@ redirect_from:
                         
                             
                         
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
 
                     <div>
 
@@ -196,7 +175,7 @@ import ballerina/log;
 
                                 <td class="code leading">
                                     <div class="highlight"><pre><code class=language-ballerina>    resource function &#39;default .(http:Request req)
-            returns http:Response|http:InternalServerError {
+            returns http:Response|error? {
 </code></pre></div>
 
                                 </td>
@@ -216,7 +195,9 @@ import ballerina/log;
                             <tr class="cTR hover-enable">
 
                                 <td class="code leading">
-                                    <div class="highlight"><pre><code class=language-ballerina>        http:Response|error clientResponse = clientEP-&gt;forward(&quot;/&quot;, req);
+                                    <div class="highlight"><pre><code class=language-ballerina>        return clientEP-&gt;forward(&quot;/&quot;, req);
+    }
+}
 </code></pre></div>
 
                                 </td>
@@ -231,89 +212,6 @@ import ballerina/log;
 
                                         </div>
                                     </div>
-                                    
-                                </td>
-                            </tr>
-                            
-                            <tr class="cTR hover-enable">
-
-                                <td class="code leading">
-                                    <div class="highlight"><pre><code class=language-ballerina>        if (clientResponse is http:Response) {
-</code></pre></div>
-
-                                </td>
-                                <td class="docs">
-                                    
-                                    <div class="cCodeDesription">
-                                        <div>
-                                            <p><code>forward()</code> can return an HTTP response or an error.</p>
-
-                                        </div>
-                                    </div>
-                                    
-                                </td>
-                            </tr>
-                            
-                            <tr class="cTR hover-enable">
-
-                                <td class="code leading">
-                                    <div class="highlight"><pre><code class=language-ballerina>            return clientResponse;
-</code></pre></div>
-
-                                </td>
-                                <td class="docs">
-                                    
-                                    <div class="cCodeDesription">
-                                        <div>
-                                            <p>If the request was successful, an HTTP response is returned.</p>
-
-                                        </div>
-                                    </div>
-                                    
-                                </td>
-                            </tr>
-                            
-                            <tr class="cTR">
-
-                                <td class="code leading">
-                                    <div class="highlight"><pre><code class=language-ballerina>        } else {
-</code></pre></div>
-
-                                </td>
-                                <td class="docs">
-                                    
-                                </td>
-                            </tr>
-                            
-                            <tr class="cTR hover-enable">
-
-                                <td class="code leading">
-                                    <div class="highlight"><pre><code class=language-ballerina>            return {body: clientResponse.message()};
-</code></pre></div>
-
-                                </td>
-                                <td class="docs">
-                                    
-                                    <div class="cCodeDesription">
-                                        <div>
-                                            <p>If there was an error, the 500 error response is sent back to the client.</p>
-
-                                        </div>
-                                    </div>
-                                    
-                                </td>
-                            </tr>
-                            
-                            <tr class="cTR">
-
-                                <td class="code leading">
-                                    <div class="highlight"><pre><code class=language-ballerina>        }
-    }
-}
-</code></pre></div>
-
-                                </td>
-                                <td class="docs">
                                     
                                 </td>
                             </tr>

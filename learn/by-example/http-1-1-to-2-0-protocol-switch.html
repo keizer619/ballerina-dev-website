@@ -33,7 +33,7 @@ redirect_from:
             <span class="c1">// Handle the errors that are returned when invoking the</span>
             <span class="c1">// [forward](https://docs.central.ballerina.io/ballerina/http/latest/clients/HttpClient#forward) function.</span>
             <span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span> <span class="p">=</span> <span class="mi">500</span><span class="p">;</span>
-            <span class="nx">response</span><span class="p">.</span><span class="nx">setPayload</span><span class="p">(&lt;</span><span class="err">@</span><span class="nx">untainted</span><span class="p">&gt;</span><span class="nx">clientResponse</span><span class="p">.</span><span class="kt">message</span><span class="p">());</span>
+            <span class="nx">response</span><span class="p">.</span><span class="nx">setPayload</span><span class="p">(</span><span class="nx">clientResponse</span><span class="p">.</span><span class="kt">message</span><span class="p">());</span>
 
         <span class="p">}</span>
         <span class="c1">// Send the response back to the caller.</span>
@@ -255,7 +255,7 @@ redirect_from:
 
                                 <td class="code leading">
                                     <div class="highlight"><pre><code class=language-ballerina>            response.statusCode = 500;
-            response.setPayload(&lt;@untainted&gt;clientResponse.message());
+            response.setPayload(clientResponse.message());
 </code></pre></div>
 
                                 </td>
