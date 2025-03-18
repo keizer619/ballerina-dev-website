@@ -483,6 +483,10 @@ const nextConfig = {
       {
         source: `/learn/integration-tutorials/:slug`,
         destination: `/learn/integration/integration-tutorials/:slug`,
+      },
+      {
+        source: `/${redirectBase}learn/scan-tool`,
+        destination: `/${redirectBase}learn/development-tutorials/additional-tools/scan-tool`,
       }
     ];
   },
